@@ -46,14 +46,14 @@ class AppText extends StatelessWidget {
         return theme.headlineSmall ?? // Usually better for H3
             const TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
       
-      // ✅ FIX 1: Replaced theme.caption with theme.labelSmall
+      //   FIX 1: Replaced theme.caption with theme.labelSmall
       case AppTextVariant.caption:
         return theme.labelSmall ?? const TextStyle(fontSize: 12);
       
       case AppTextVariant.small:
         return theme.bodySmall ?? const TextStyle(fontSize: 11);
       
-      // ✅ FIX 2: Combined body and default
+      //   FIX 2: Combined body and default
       case AppTextVariant.body:
       default:
         return theme.bodyMedium ?? const TextStyle(fontSize: 14);

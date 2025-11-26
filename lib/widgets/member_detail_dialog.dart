@@ -55,7 +55,7 @@ class MemberDetailDialog extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       contentPadding: EdgeInsets.zero,
-      // ✅ FIX 1: Use withAlpha
+      //   FIX 1: Use withAlpha
       backgroundColor: const Color(0xFF23233A).withAlpha(242), // ~0.95 opacity
       content: SingleChildScrollView(
         child: Column(
@@ -67,7 +67,7 @@ class MemberDetailDialog extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
               decoration: BoxDecoration(
                  gradient: LinearGradient(
-                   // ✅ FIX 2 & 3: Use withAlpha
+                   //   FIX 2 & 3: Use withAlpha
                    colors: [Colors.white.withAlpha(26), Colors.white.withAlpha(13)], // ~0.1 and ~0.05 opacity
                    begin: Alignment.topLeft,
                    end: Alignment.bottomRight,
@@ -84,7 +84,7 @@ class MemberDetailDialog extends StatelessWidget {
                     backgroundColor: Colors.grey.shade600,
                     foregroundImage: AssetImage(avatarAssetPath),
                     onForegroundImageError: (exception, stackTrace) {
-                      print('❌ Error loading asset image: $avatarAssetPath');
+                      print('   Error loading asset image: $avatarAssetPath');
                       print(exception);
                     },
                     child: const Icon(Icons.person, size: 50, color: Colors.white70),
@@ -181,7 +181,7 @@ class MemberDetailDialog extends StatelessWidget {
       color: color,
       onPressed: () => _launchUrl(context, url),
       style: IconButton.styleFrom(
-        // ✅ FIX 4: Use withAlpha
+        //   FIX 4: Use withAlpha
         backgroundColor: Colors.white.withAlpha(26), // ~0.1 opacity
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         padding: const EdgeInsets.all(12),

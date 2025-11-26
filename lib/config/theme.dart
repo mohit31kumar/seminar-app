@@ -37,7 +37,7 @@ ThemeData buildLightTheme() {
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
     ),
-    // ✅ FIX: Using CardThemeData instead of CardTheme
+    //   FIX: Using CardThemeData instead of CardTheme
     cardTheme: CardThemeData(
       elevation: 1,
       shadowColor: Colors.black.withOpacity(0.05),
@@ -107,7 +107,7 @@ ThemeData buildDarkTheme() {
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
     ),
-    // ✅ FIX: Using CardThemeData instead of CardTheme
+    //   FIX: Using CardThemeData instead of CardTheme
     cardTheme: CardThemeData(
       elevation: 0,
       margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 0),

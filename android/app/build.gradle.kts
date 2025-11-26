@@ -13,7 +13,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-        // ✅ Kotlin DSL requires the `is` prefix
+        //   Kotlin DSL requires the `is` prefix
         isCoreLibraryDesugaringEnabled = true
     }
 

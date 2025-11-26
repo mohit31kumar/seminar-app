@@ -21,7 +21,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     });
   }
 
-  // --- ✅ NEW: Helper to determine color and icon based on content ---
+  // ---   NEW: Helper to determine color and icon based on content ---
   Map<String, dynamic> _getNotificationStyle(String title, String body) {
     final String combined = '$title $body'.toLowerCase();
 

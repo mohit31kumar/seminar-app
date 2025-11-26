@@ -63,7 +63,7 @@ class AppState with ChangeNotifier, WidgetsBindingObserver {
     _notificationsSubscription?.cancel();
 
     if (user != null) {
-      // ✅ UPDATED: Run adminDirectory sync for ANY user login to ensure admins are always listed
+      //   UPDATED: Run adminDirectory sync for ANY user login to ensure admins are always listed
       // (This allows faculty to create notifications for admins)
       _runAdminDirectorySync();
 
@@ -243,7 +243,7 @@ class AppState with ChangeNotifier, WidgetsBindingObserver {
     return error;
   }
 
-  // --- ✅ NEW: Helper to find WHO is blocking the slot ---
+  // ---   NEW: Helper to find WHO is blocking the slot ---
   Booking? getConflictingBooking(String hallName, String date, String startTime, String endTime, {String? excludeBookingId}) {
     try {
       final requestStart = DateTime.parse('$date $startTime');
@@ -279,7 +279,7 @@ class AppState with ChangeNotifier, WidgetsBindingObserver {
     return getConflictingBooking(hallName, date, startTime, endTime, excludeBookingId: excludeBookingId) != null;
   }
 
-  // ✅ UPDATED: Checks conflict before submitting
+  //   UPDATED: Checks conflict before submitting
   Future<void> submitBooking(Booking booking) async {
     // Check for conflicts against existing Approved bookings
     if (checkBookingConflict(booking.hall, booking.date, booking.startTime, booking.endTime)) {
@@ -289,7 +289,7 @@ class AppState with ChangeNotifier, WidgetsBindingObserver {
     // 1. Create the booking document
     final bookingDocRef = await firestoreService.addBookingAndGetRef(booking);
     
-    // 2. ✅ NEW: Create notifications for all admins
+    // 2.   NEW: Create notifications for all admins
     try {
       final adminUIDs = await firestoreService.getAllAdminUIDs();
       
@@ -312,7 +312,7 @@ class AppState with ChangeNotifier, WidgetsBindingObserver {
     await firestoreService.cancelBooking(bookingId);
   }
 
-  // ✅ UPDATED: Checks conflict before Approving
+  //   UPDATED: Checks conflict before Approving
   Future<void> reviewBooking({
     required String bookingId,
     required String newStatus,

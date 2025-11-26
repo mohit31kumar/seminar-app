@@ -101,7 +101,7 @@ GoRouter createRouter(AppState appState) {
       // Standalone routes (no shell)
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       
-      // ✅ DELETED THE /register ROUTE
+      //   DELETED THE /register ROUTE
       // GoRoute(
       //     path: '/register',
       //     builder: (context, state) => const RegisterScreen()),
@@ -292,7 +292,7 @@ GoRouter createRouter(AppState appState) {
       final role = currentUser?.role;
       final location = state.matchedLocation;
       
-      // ✅ REMOVED /register FROM THE CHECK
+      //   REMOVED /register FROM THE CHECK
       final isAuthPage = location == '/login' ||
           location == '/splash';
 

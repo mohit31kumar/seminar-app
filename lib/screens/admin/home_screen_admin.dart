@@ -127,7 +127,7 @@ class AdminHomeScreen extends StatelessWidget {
 
     final approvedBookings = allBookings.where((b) => b.status == 'Approved');
     
-    // --- ✅ MODIFIED: Calculate "Approved This Month" ---
+    // ---   MODIFIED: Calculate "Approved This Month" ---
     final totalApprovedThisMonth = approvedBookings.where((b) {
       final bookingDate = DateTime.parse(b.date);
       return bookingDate.year == now.year && bookingDate.month == now.month;
@@ -194,7 +194,7 @@ class AdminHomeScreen extends StatelessWidget {
                   context.go('/admin/halls');
                 },
               ),
-              // --- ✅ MODIFIED: Stat Card Updated ---
+              // ---   MODIFIED: Stat Card Updated ---
               _buildStatCard(
                 context,
                 title: 'Approved This Month',
@@ -283,7 +283,7 @@ class AdminHomeScreen extends StatelessWidget {
           // --- 5. Quick Action Buttons ---
           const SizedBox(height: 24),
           
-          // --- ✅ ADDED: View Full Analytics Button ---
+          // ---   ADDED: View Full Analytics Button ---
           ElevatedButton.icon(
             icon: const Icon(Icons.analytics_outlined),
             label: const Text('View Full Analytics'),

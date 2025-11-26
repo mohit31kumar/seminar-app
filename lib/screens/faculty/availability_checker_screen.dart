@@ -77,7 +77,7 @@ class _AvailabilityCheckerScreenState extends State<AvailabilityCheckerScreen> {
     return '$startHour:00 - $endHour:00';
   }
 
-  // ✅ NEW: Real-time conflict check
+  //   NEW: Real-time conflict check
   void _checkConflicts() {
     if (_selectedDay == null || _selectedStartTime == null || _selectedEndTime == null) {
       setState(() {
@@ -203,7 +203,7 @@ class _AvailabilityCheckerScreenState extends State<AvailabilityCheckerScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ✅ HALL BLOCKED WARNING
+            //   HALL BLOCKED WARNING
             if (!widget.hall.isAvailable)
               Container(
                 margin: const EdgeInsets.only(bottom: 20),
@@ -376,13 +376,13 @@ class _AvailabilityCheckerScreenState extends State<AvailabilityCheckerScreen> {
                   setState(() {
                     _selectedEndTime = value;
                   });
-                  // ✅ Trigger check immediately on selection
+                  //   Trigger check immediately on selection
                   _checkConflicts();
                 },
               ),
               const SizedBox(height: 24),
               
-              // ✅ CONFLICT WARNING BOX
+              //   CONFLICT WARNING BOX
               if (_conflictingBooking != null)
                 Container(
                   margin: const EdgeInsets.only(bottom: 16),

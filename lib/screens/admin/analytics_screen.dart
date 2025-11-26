@@ -153,13 +153,13 @@ class AnalyticsScreen extends StatelessWidget {
     final deptChartData = bookingsByDept.entries.map((entry) {
       return {'name': entry.key, 'count': entry.value.length};
     }).toList();
-    // ✅ FIX 1: Replaced sortedBy with standard sort
+    //   FIX 1: Replaced sortedBy with standard sort
     deptChartData.sort((a, b) => (b['count'] as int).compareTo(a['count'] as int));
 
     // --- Data for Key Metrics ---
     final totalPending = allBookings.where((b) => b.status == 'Pending').length;
     
-    // ✅ FIX 1: Replaced sortedBy with standard sort
+    //   FIX 1: Replaced sortedBy with standard sort
     final sortedHalls = bookingsByHall.entries.toList()
       ..sort((a, b) => a.value.length.compareTo(b.value.length));
     final mostBookedHall = sortedHalls.isEmpty ? null : sortedHalls.last;
@@ -213,7 +213,7 @@ class AnalyticsScreen extends StatelessWidget {
                     StatCard(
                       icon: Icons.business_rounded,
                       title: 'Busiest Hall',
-                      // ✅ FIX 1: Use .key on the MapEntry
+                      //   FIX 1: Use .key on the MapEntry
                       value: mostBookedHall?.key ?? 'N/A',
                     ),
                   ],
@@ -280,7 +280,7 @@ class AnalyticsScreen extends StatelessWidget {
                           barWidth: 4,
                           isStrokeCapRound: true,
                           
-                          // ✅ FIX 2: 'withOpacity' replaced with 'withAlpha'
+                          //   FIX 2: 'withOpacity' replaced with 'withAlpha'
                           // (0.3 * 255 = 76.5, so we use 77)
                           belowBarData: BarAreaData(show: true, color: Colors.amber.withAlpha(77)), 
                         ),
@@ -314,7 +314,7 @@ class AnalyticsScreen extends StatelessWidget {
                           ),
                           leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 28, getTitlesWidget: (value, meta) => SideTitleWidget(axisSide: meta.axisSide, child: Text(value.toInt().toString())))),
                           
-                          // ✅ FIX 3: Typo 'showTItles' corrected to 'showTitles'
+                          //   FIX 3: Typo 'showTItles' corrected to 'showTitles'
                           topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                           rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                        ),

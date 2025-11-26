@@ -69,7 +69,7 @@ class _FacilitiesScreenState extends State<FacilitiesScreen> {
           ),
           const SizedBox(height: 24),
           
-          // --- ✅ NEW UI: IMAGE CARD ---
+          // ---   NEW UI: IMAGE CARD ---
           Card(
             clipBehavior: Clip.antiAlias,
             child: Column(
@@ -123,7 +123,7 @@ class _FacilitiesScreenState extends State<FacilitiesScreen> {
           ),
           const SizedBox(height: 8),
 
-          // --- ✅ NEW UI: LISTVIEW FOR AMENITIES ---
+          // ---   NEW UI: LISTVIEW FOR AMENITIES ---
           if (selectedHall.facilities.isEmpty)
             const Card(
               child: ListTile(

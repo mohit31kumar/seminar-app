@@ -41,7 +41,7 @@ class BookingScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: InkWell(
-                    // ✅ FIX: Use push to keep navigation history
+                    //   FIX: Use push to keep navigation history
                     onTap: () {
                       context.push('/booking/availability/${hall.id}');
                     },
@@ -94,7 +94,7 @@ class BookingScreen extends StatelessWidget {
                                         .titleLarge
                                         ?.copyWith(fontWeight: FontWeight.bold),
                                   ),
-                                  // ✅ Visual indicator if blocked
+                                  //   Visual indicator if blocked
                                   if (!hall.isAvailable)
                                     Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

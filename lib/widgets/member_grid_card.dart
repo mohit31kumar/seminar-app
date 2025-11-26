@@ -20,7 +20,7 @@ class MemberGridCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ Use GlassContainer instead of Card
+    //   Use GlassContainer instead of Card
     return GlassContainer(
       onTap: onTap,
       borderRadius: 16, // Match dialog style
@@ -39,7 +39,7 @@ class MemberGridCard extends StatelessWidget {
             },
           ),
           const SizedBox(height: 12),
-          // ✅ Use AppText
+          //   Use AppText
           AppText(
             name,
             variant: AppTextVariant.h3, // Or body with fontWeight
@@ -50,7 +50,7 @@ class MemberGridCard extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           const SizedBox(height: 4),
-          // ✅ Use AppText
+          //   Use AppText
           AppText(
             role,
             variant: AppTextVariant.caption,

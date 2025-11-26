@@ -79,7 +79,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
     }
   }
 
-  // --- ✅ THIS DIALOG IS NOW FIXED to correctly report errors ---
+  // ---   THIS DIALOG IS NOW FIXED to correctly report errors ---
   void _showChangeRoleDialog(BuildContext context, User user) {
     showDialog(
       context: context,
@@ -120,7 +120,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                     if (dialogContext.mounted) Navigator.of(dialogContext).pop();
                     
                     if (context.mounted) {
-                      // ✅ Check if the error is null or not
+                      //   Check if the error is null or not
                       if (error == null) {
                         // Success!
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -274,13 +274,13 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
               case 'reset_password':
                 _sendPasswordReset(context, user);
                 break;
-              // ✅ "delete_user" case is removed
+              //   "delete_user" case is removed
               case 'change_role':
                 _showChangeRoleDialog(context, user);
                 break;
             }
           },
-          // ✅ "Delete User" option is removed
+          //   "Delete User" option is removed
           itemBuilder: (context) => [
             const PopupMenuItem(
               value: 'reset_password',

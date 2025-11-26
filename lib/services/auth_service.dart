@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart' as core;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:seminar_booking_app/models/user.dart';
 import 'package:seminar_booking_app/services/firestore_service.dart';
-// ❌ Removed cloud_functions import
+//    Removed cloud_functions import
 
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;

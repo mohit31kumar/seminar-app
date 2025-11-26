@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // ✅ UPDATED GOOGLE SIGN-IN HANDLER
+  //   UPDATED GOOGLE SIGN-IN HANDLER
   Future<void> _handleGoogleSignIn() async {
     final appState = context.read<AppState>();
     if (appState.isLoading) return;
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (mounted) {
         setState(() {
           if (e.code == 'invalid-email-domain') {
-            _errorText = 'Only @poornima.edu.in accounts are allowed.';
+            _errorText = 'Only University email is allowed.';
           } else if (e.code == 'account-exists-with-different-credential') {
              _errorText = 'An account already exists with this email.';
           } else {
@@ -82,16 +82,66 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleForgotPassword() async {
     final email = _emailController.text.trim();
-    const adminEmail = '2024bcamafsmohit19405@poornima.edu.in'; // Replace as needed
+    const adminEmail = '2024bcamafsmohit19405@poornima.edu.in';
     final subject = Uri.encodeComponent('Request for Password Reset');
     final body = Uri.encodeComponent(
         'Hello Admin,\n\nI am requesting a password reset for my account.\n\nRegistered Email: $email\n\nPlease send the password reset link to my registered email address.\n\nThank you.');
+    final mailtoLink = Uri.parse('mailto:$adminEmail?subject=$subject&body=$body');
 
-    final mailtoLink =
-        Uri.parse('mailto:$adminEmail?subject=$subject&body=$body');
-    if (await canLaunchUrl(mailtoLink)) {
-      await launchUrl(mailtoLink);
+    // Simple email format check
+    final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+
+    // If user provided a (seemingly valid) email, try to send a Firebase password reset email.
+    if (email.isNotEmpty && emailRegex.hasMatch(email)) {
+      try {
+        await auth.FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Password reset email sent. Check your inbox.')),
+        );
+        return;
+      } on auth.FirebaseAuthException catch (e) {
+        if (!mounted) return;
+        // If Firebase reports the user is not found or another auth issue, show message
+        String message;
+        if (e.code == 'user-not-found') {
+          message = 'No account found for that email.';
+        } else if (e.code == 'invalid-email') {
+          message = 'The email address is invalid.';
+        } else {
+          message = 'Could not send password reset email. Please try again.';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+        // Fall through to offer mail client as a fallback
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Unexpected error. Trying email client...')),
+          );
+        }
+        // Fall through to mailto fallback
+      }
     } else {
+      // If no valid email provided, inform user and open mail client to contact admin.
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please enter your registered email, or contact admin via email.')),
+        );
+      }
+    }
+
+    // Fallback: attempt to open the user's mail client to contact admin (works on Android/iOS/Web if supported)
+    try {
+      if (await canLaunchUrl(mailtoLink)) {
+        await launchUrl(mailtoLink);
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Could not open email client.')),
+          );
+        }
+      }
+    } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Could not open email client.')),

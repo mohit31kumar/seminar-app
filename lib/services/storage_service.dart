@@ -45,7 +45,7 @@ class StorageService {
     }
   }
 
-  // --- ✅ THIS FUNCTION IS NOW FIXED ---
+  // ---   THIS FUNCTION IS NOW FIXED ---
   /// Deletes an image from Firebase Storage.
   Future<void> deleteImage(String imageUrl) async {
     if (imageUrl.isEmpty) return; // Nothing to delete

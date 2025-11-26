@@ -81,7 +81,7 @@ class MyBookingsScreen extends StatelessWidget {
     final formattedDate = DateFormat.yMMMMd().format(DateTime.parse(booking.date));
     final timeRange = '${booking.startTime} - ${booking.endTime}';
     
-    // --- ✅ NEW CANCELLATION LOGIC ---
+    // ---   NEW CANCELLATION LOGIC ---
     bool canCancel;
     if (booking.status == 'Pending') {
       // 1. Can ALWAYS cancel a 'Pending' request

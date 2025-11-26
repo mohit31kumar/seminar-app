@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late TextEditingController _departmentController;
   late TextEditingController _employeeIdController;
   
-  // --- ✅ "NEW USER UI" VARIABLE ---
+  // ---   "NEW USER UI" VARIABLE ---
   bool _isNewUser = false; // To show the welcome message
   bool _isLoading = false; 
 
@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _employeeIdController = 
           TextEditingController(text: currentUser?.employeeId ?? '');
 
-      // --- ✅ "NEW USER UI" LOGIC ---
+      // ---   "NEW USER UI" LOGIC ---
       // Checks for incomplete data from Google Sign-In
       if (currentUser?.department == 'Unknown' || currentUser?.employeeId == '0000') {
         _isNewUser = true; // Set flag to show a message
@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 content: Text('Profile updated successfully!'),
                 backgroundColor: Colors.green),
           );
-          // --- ✅ "NEW USER UI" UPDATE ---
+          // ---   "NEW USER UI" UPDATE ---
           // After saving, they are no longer a "new user"
           setState(() {
             _isNewUser = false;
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Profile'),
-        // --- ✅ "NEW USER UI" ---
+        // ---   "NEW USER UI" ---
         // Hides the back button if they are a new user
         leading: _isNewUser ? const SizedBox() : null,
         actions: [
@@ -173,7 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 24),
 
-          // --- ✅ "NEW USER UI" MESSAGE ---
+          // ---   "NEW USER UI" MESSAGE ---
           // This container only appears if they are a new user
           if (_isNewUser)
             Container(
@@ -257,7 +257,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
           
-          // --- ✅ ERROR FIX ---
+          // ---   ERROR FIX ---
           // Replaced the incorrect `TextStyle` with the correct one.
           ListTile(
             leading: Icon(Icons.logout, color: Colors.red.shade700),

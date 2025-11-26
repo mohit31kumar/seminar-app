@@ -32,7 +32,7 @@ class GlassContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ FIX 1a: Replace withOpacity with withAlpha
+    //   FIX 1a: Replace withOpacity with withAlpha
     final bgColor =
         backgroundColor ?? Colors.white.withAlpha(15); // subtle glass (0.06 * 255)
 
@@ -48,7 +48,7 @@ class GlassContainer extends StatelessWidget {
             color: bgColor,
             borderRadius: BorderRadius.circular(borderRadius),
             border: border ??
-                // ✅ FIX 1b: Replace withOpacity with withAlpha
+                //   FIX 1b: Replace withOpacity with withAlpha
                 Border.all(
                   color: Colors.white.withAlpha(15), // (0.06 * 255)
                   width: 1,
@@ -56,10 +56,10 @@ class GlassContainer extends StatelessWidget {
             boxShadow: elevation > 0
                 ? [
                     BoxShadow(
-                      // ✅ FIX 1c: Replace withOpacity with withAlpha
+                      //   FIX 1c: Replace withOpacity with withAlpha
                       color: Colors.black.withAlpha(64), // (0.25 * 255)
                       blurRadius: elevation,
-                      // ✅ FIX 2: Remove 'const' from Offset
+                      //   FIX 2: Remove 'const' from Offset
                       offset: Offset(0, elevation / 2),
                     )
                   ]

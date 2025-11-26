@@ -152,7 +152,7 @@ class FirestoreService {
     return _db.collection('bookings').add(booking.toJson());
   }
 
-  /// ✅ NEW: Adds a booking and returns the document ID
+  ///   NEW: Adds a booking and returns the document ID
   Future<String> addBookingAndGetRef(Booking booking) async {
     final docRef = await _db.collection('bookings').add(booking.toJson());
     return docRef.id;
@@ -171,7 +171,7 @@ class FirestoreService {
   
   // --- NOTIFICATION METHODS ---
   
-  /// ✅ UPDATED: Gets all admin UIDs - tries adminDirectory first, falls back to users collection
+  ///   UPDATED: Gets all admin UIDs - tries adminDirectory first, falls back to users collection
   Future<List<String>> getAllAdminUIDs() async {
     try {
       final snapshot = await _db.collection('adminDirectory').get();
@@ -194,7 +194,7 @@ class FirestoreService {
             .toList());
   }
 
-  /// ✅ NEW: Sync adminDirectory with admins from the users collection
+  ///   NEW: Sync adminDirectory with admins from the users collection
   /// Adds missing admin docs and removes users who are no longer admins.
   Future<void> syncAdminDirectory() async {
     try {

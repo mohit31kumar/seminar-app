@@ -47,7 +47,7 @@ async function createInAppNotification(userId, title, body) {
 }
 
 /**
- * ✅ NEW HELPER
+ *   NEW HELPER
  * Gets a list of all user IDs that have the 'admin' role.
  */
 async function getAllAdminIds() {
@@ -72,7 +72,7 @@ async function getAllAdminIds() {
 }
 
 /**
- * ✅ NEW HELPER
+ *   NEW HELPER
  * Creates an in-app notification with an optional bookingId.
  */
 async function createInAppNotificationWithBooking(
