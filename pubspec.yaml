@@ -43,6 +43,10 @@ dependencies:
 
   font_awesome_flutter: ^10.7.0
 
+  # Update checking dependencies
+  package_info_plus: ^4.0.0
+  http: 1.5.0
+  open_filex: ^4.0.4
   flutter_animate: ^4.5.0 # Or latest
 
   google_sign_in: ^6.2.1

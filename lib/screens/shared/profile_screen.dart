@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:seminar_booking_app/providers/app_state.dart';
+import 'dart:io';
+import 'package:seminar_booking_app/services/update_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -257,6 +259,82 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
           
+          // --- Check for Updates (above Logout) ---
+          ListTile(
+            leading: const Icon(Icons.system_update_outlined),
+            title: const Text('Check for Updates'),
+            onTap: () async {
+              if (!Platform.isAndroid) {
+                if (!mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Updates not supported on this platform.')),
+                );
+                return;
+              }
+
+              final service = UpdateService();
+              // Check for update
+              final info = await service.checkForUpdate();
+              if (!mounted) return;
+              if (info == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("You're on the latest version.")),
+                );
+                return;
+              }
+
+              // Show dialog with changelog and confirm
+              final doUpdate = await showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Update Available'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Version: ${info.remoteVersionCode}'),
+                      const SizedBox(height: 8),
+                      if (info.changelog != null) Text(info.changelog!),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(child: const Text('Later'), onPressed: () => Navigator.of(ctx).pop(false)),
+                    ElevatedButton(child: const Text('Update'), onPressed: () => Navigator.of(ctx).pop(true)),
+                  ],
+                ),
+              );
+
+              if (doUpdate != true) return;
+
+              // Show downloading dialog
+              showDialog<void>(
+                context: context,
+                barrierDismissible: false,
+                builder: (dCtx) {
+                  // Start download when dialog is built
+                  service.downloadApk(info.downloadUrl, onProgress: (r, t) {
+                    // We could update progress UI if we kept state; keep simple for now
+                  }).then((file) async {
+                    Navigator.of(dCtx).pop(); // close progress dialog
+                    // Trigger install
+                    await service.installApk(file);
+                  }).catchError((e) {
+                    Navigator.of(dCtx).pop();
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Update failed: $e')),
+                      );
+                    }
+                  });
+
+                  return const AlertDialog(
+                    content: SizedBox(height: 80, child: Center(child: CircularProgressIndicator())),
+                  );
+                },
+              );
+            },
+          ),
+
           // ---   ERROR FIX ---
           // Replaced the incorrect `TextStyle` with the correct one.
           ListTile(
